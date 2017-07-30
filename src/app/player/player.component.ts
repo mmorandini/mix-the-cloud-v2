@@ -40,11 +40,14 @@ export class PlayerComponent implements OnInit {
         	else if (error.status === 406) {
             	return Observable.throw(new Error(error.status));
         	}
-    	});
-   	}
+    	})
+    	.subscribe((result: any) => {
+        console.log(result);
+    	})
+    }
 
    	handleResponse(res: any): any{
-		var data = res.json();
+		var data = res;
 		var result = [];
 		if (data && data.collection) {
 			data.collection.forEach(function(item) {
@@ -58,7 +61,6 @@ export class PlayerComponent implements OnInit {
 				song.imageUrl = item.artwork_url;
 				song.link = item.permalink_url;
 				result.push(song);
-				console.log(result)
 			});
 		}
 
