@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Song} from '../interfaces/Song';
 import { HttpClient } from '@angular/common/http';
 import {Http, Response} from '@angular/http';
-import {Observable}     from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Rx';
+// import 'rxjs/add/operator/map';
 
 import { Constants } from '../app.constants';
 
@@ -25,30 +25,26 @@ export class PlayerComponent implements OnInit {
     	query = encodeURIComponent(query.replace(/ /gi, '+'));
     	const url = `https://api.soundcloud.com/tracks.json?client_id=${Constants.API_KEY}&q=${query}&limit=${maxResults}&linked_partitioning=1`;
     	this.http
-    		.get(url)
-    		.map(response => {
-    			console.log(response)
-    		})
-
-    	
-    	// .catch((error) => {
-    	// 	if (error.status === 500) {
-     //        	return Observable.throw(new Error(error.status));
-     //    	}
-     //    	else if (error.status === 400) {
-     //       		return Observable.throw(new Error(error.status));
-     //    	}
-     //    	else if (error.status === 409) {
-     //        	return Observable.throw(new Error(error.status));
-     //    	}
-     //    	else if (error.status === 406) {
-     //        	return Observable.throw(new Error(error.status));
-     //    	}
-    	// });
+    	.get(url)
+    	.map(res => this.handleResponse(res))
+    	.catch((error) => {
+    		if (error.status === 500) {
+            	return Observable.throw(new Error(error.status));
+        	}
+        	else if (error.status === 400) {
+           		return Observable.throw(new Error(error.status));
+        	}
+        	else if (error.status === 409) {
+            	return Observable.throw(new Error(error.status));
+        	}
+        	else if (error.status === 406) {
+            	return Observable.throw(new Error(error.status));
+        	}
+    	});
    	}
 
-   	handleResponse(response: any): any{
-		var data = response.strigify();
+   	handleResponse(res: any): any{
+		var data = res.json();
 		var result = [];
 		if (data && data.collection) {
 			data.collection.forEach(function(item) {
