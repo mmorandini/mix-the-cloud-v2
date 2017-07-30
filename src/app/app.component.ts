@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FormsModule} from '@angular/forms';
+
+
 import { Constants } from './app.constants';
 
 declare let SC: any;
@@ -15,10 +18,8 @@ export class AppComponent {
   
   ngOnInit(){
   	SC
-  .initialize({
-    client_id: Constants.API_KEY
-  });
-
+    .initialize({
+      client_id: Constants.API_KEY
+    });
   }
-
 }

@@ -1,3 +1,4 @@
-<p>
-  player works!
-</p>
+<form>
+	<input type="text" id="query" name="query" [(ngModel)]="this.query" (change)="searchSoundCloud(this.query)">
+	<input type="submit" name="" value="Search...">
+</form>
