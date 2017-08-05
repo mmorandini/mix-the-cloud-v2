@@ -1,4 +1,34 @@
-<form>
-	<input type="text" id="query" name="query" [(ngModel)]="this.query" (change)="searchSoundCloud(this.query)">
-	<input type="submit" name="" value="Search...">
-</form>
+<div id="console" class="fl w-100 flex-item">
+  <div id="deck-1" class="fl w-40 h-100">
+    <button (click)="playPause(1)">Play/Pause</button>
+  </div>
+  <div id="ctrls" class="fl w-20 h-100"></div>
+  <div id="deck-2" class="fl w-40 h-100">
+    <button (click)="playPause(2)">Play/Pause</button>
+  </div>
+</div>
+
+
+<div id="results" class="fl w-100 flex-item">
+  <form>
+    <input type="text" id="query" name="query" [(ngModel)]="this.query" (change)="searchSoundCloud(this.query)">
+    <input type="submit" name="" value="Search...">
+  </form>
+
+  <div>
+    <ul *ngIf="this,results" style="list-style-type: none;" class="pa0">
+      <!--<li *ngFor="let song of this,results">{{song.name}}</li>-->
+      <li *ngFor="let song of results" class="tl pa3 result-item w-60">
+        <div class="tl di" style="overflow: hidden">{{song.title}}</div>
+        <div class="tr di">{{song.duration}}</div>
+        <div class="fr">
+          <button class="pa2" (click)="loadToDeck(1, song)">A</button>
+          <button class="pa2" (click)="loadToDeck(2, song)">B</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+

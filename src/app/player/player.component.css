@@ -1,0 +1,25 @@
+.flex-item{
+  flex-grow: 1;
+  margin: auto;
+}
+
+#console{
+  height: 64vh;
+  padding: 10px;
+  background: darkorange;
+}
+
+#results{
+  height: 29vh;
+  background: darkred;
+}
+
+#ctrls{
+  /*height: 100%;*/
+  background: lime;
+}
+
+.result-item{
+  line-height: 3;
+  margin: 0 auto;
+}
